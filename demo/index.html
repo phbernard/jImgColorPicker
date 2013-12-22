@@ -1,0 +1,27 @@
+<html>
+	<body>
+		<script src="jquery-1.10.2.min.js"></script>
+		<script src="../jQuery.ImgColorPicker.js"></script>
+		<h1>jImgColorPicker Demo</h1>
+		
+		<canvas src="pic.png" id="pic" style="border: 1px solid"></canvas>
+
+		<div id="color" style="width: 150px; text-align: center;"></div>
+		
+		<script type="text/javascript">
+			$(function() {
+				$('#pic').colorPicked(function(canvas, r, g, b, a) {
+					if (a != 0) {
+						hex = rgbToHex(r, g, b);
+						$('#color').css('background-color', hex);
+						$('#color').html(hex);
+					}
+					else {
+						$('#color').css('background-color', '#fff');
+						$('#color').html('Transparent');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
