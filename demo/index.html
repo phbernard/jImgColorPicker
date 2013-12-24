@@ -4,9 +4,38 @@
 		<script src="../jQuery.ImgColorPicker.js"></script>
 		<h1>jImgColorPicker Demo</h1>
 		
-		<canvas src="pic.png" id="pic" style="border: 1px solid"></canvas>
-
-		<div id="color" style="width: 150px; text-align: center;"></div>
+		<table>
+			<thead>
+				<tr>
+					<td>
+						Classic picture
+					</td>
+					<td>
+						Resized picture (with tranform and scale)
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<canvas src="pic.png" id="pic" style="border: 1px solid"></canvas>
+					</td>
+					<td>
+						<div>
+							<canvas src="pic.png" id="pic_resized" style="border: 1px solid; -webkit-transform: scale(0.8); transform: scale(0.8)"></canvas>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="color" style="width: 150px; text-align: center;"></div>
+					</td>
+					<td>
+						<div id="color_resized" style="width: 150px; text-align: center;"></div>
+					</td>
+				</tr>
+			</tbody>
+		<table>
 		
 		<script type="text/javascript">
 			$(function() {
@@ -21,6 +50,19 @@
 						$('#color').html('Transparent');
 					}
 				});
+				
+				$('#pic_resized').colorPicked(function(canvas, r, g, b, a) {
+					if (a != 0) {
+						hex = rgbToHex(r, g, b);
+						$('#color_resized').css('background-color', hex);
+						$('#color_resized').html(hex);
+					}
+					else {
+						$('#color_resized').css('background-color', '#fff');
+						$('#color_resized').html('Transparent');
+					}
+				});
+				
 			});
 		</script>
 	</body>
