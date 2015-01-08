@@ -1,18 +1,27 @@
 /**
- * jImgColorPicker - Copyright Philippe Bernard 2013
+ * jImgColorPicker - Copyright Philippe Bernard 2013 - 2015
  */
 
 (function($) {
-	$.fn.colorPicked = function(callback) {
-		registerElement(this, callback);
+	$.fn.colorPicked = function() {
+		registerElement(this, arguments);
 		return this;
 	};
 } (jQuery));
 
-function registerElement(canvas, callback) {
+function registerElement(canvas, args) {
 	if (! canvas.is('canvas')) {
 		console.log('Element ' + canvas + 'is not a canvas');
 		return;
+	}
+
+	var mouseObj = canvas;
+	var callback = args[0];
+	if (args.length >= 2) {
+		if (args[0] != undefined) {
+			mouseObj = args[0];
+		}
+		callback = args[1];
 	}
 	
 	var img = new Image();
@@ -24,7 +33,7 @@ function registerElement(canvas, callback) {
 		context.drawImage(e.target, 0, 0);
 		
         if (callback != undefined) {
-		    canvas.mousemove(function(e) {
+        	mouseObj.mousemove(function(e) {
 		    	var scaleX = 1;
 		    	var scaleY = 1;
 		    	
